@@ -1,0 +1,9 @@
+#Ignore environments configuration
+src/main/resources/env/config.development.properties
+src/main/resources/env/config.production.properties
+
+#Ignore build path
+target/
+
+#Ignore eclipse configuration project
+.project
