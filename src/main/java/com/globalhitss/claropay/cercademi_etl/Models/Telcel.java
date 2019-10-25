@@ -1,7 +1,7 @@
 package com.globalhitss.claropay.cercademi_etl.Models;
 
 
-public class Telcel implements Commerce
+public class Telcel extends CommerceNoCoords
 {
   String id_corresponsal = "";
   String estado = "";
@@ -36,10 +36,6 @@ public class Telcel implements Commerce
   public String getSpecies()   { return "Telcel"; }
 
   public String getClassName() { return "null"; }
-
-  public double getLatitude()  { return 0.0; }
- 
-  public double getLongitude() { return 0.0; }
 
   public String getPastId()    { return id_corresponsal; }
 
