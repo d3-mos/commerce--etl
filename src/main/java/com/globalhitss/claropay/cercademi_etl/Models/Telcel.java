@@ -31,6 +31,7 @@ public class Telcel extends CommerceNoCoords
     this.calle = calle;
     this.numero = numero;
     this.cp = cp;
+    loadCoords();
   }
 
   public String getSpecies()   { return "Telcel"; }

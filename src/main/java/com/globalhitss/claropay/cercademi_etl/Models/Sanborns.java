@@ -25,7 +25,6 @@ public class Sanborns extends CommerceNoCoords
     this.cp                  = cp;
     this.localidad_municipio = localidad_municipio;
     this.estado              = estado;
-
     loadCoords();
   }
 

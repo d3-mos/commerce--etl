@@ -30,11 +30,12 @@ public class App
       try {
         AppProperties.load();
 
+       new Thread( new ETLCommerceInbursa()  ).start();
+       new Thread( new ETLCommerceSears()    ).start();
+
        // new Thread( new ETLCommerceOXXO()     ).start();
-       // new Thread( new ETLCommerceInbursa()  ).start();
-       // new Thread( new ETLCommerceSears()    ).start();
        // new Thread( new ETLCommerceTelcel()   ).start();
-        new Thread( new ETLCommerceSanborns() ).start();
+       // new Thread( new ETLCommerceSanborns() ).start();
       }
       catch(Exception e) {}
     }
