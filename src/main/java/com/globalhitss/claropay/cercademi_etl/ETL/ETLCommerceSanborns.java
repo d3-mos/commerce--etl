@@ -8,11 +8,28 @@ import java.util.LinkedList;
 import java.sql.ResultSet;
 
 
-/** */
+/**
+ * This custom ETL, implements the extract procedure to fetch all data from
+ * cat_sanborns table in origin database.
+ * 
+ * @author  Ricardo Bermúdez Bermúdez
+ * @version 1.0.0, Oct 23th, 2019.
+ * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
+ * @see     com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords
+ * @see     com.globalhitss.claropay.cercademi_etl.Models.Sanborns
+ * @see     ETL
+ * @see     ETLCommerce
+ */
 public class ETLCommerceSanborns extends ETLCommerce
 {
   
-  /** */
+  /**
+   * {@inheritDoc}
+   * 
+   * It's the custom extract procedure implementation to Sanborns objects. If
+   * it's require, the procedure wait all requests of coordinates of each
+   * commerce.
+   */
   @Override
   public LinkedList<Commerce> extract() 
     throws ETLExtractException

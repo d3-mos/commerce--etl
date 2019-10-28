@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.lang.Runnable;
 
 /**
- * Represents the errors in fetch data process (extract).
+ * Represents the errors in fetch data procedure (extract).
  *
  * @author Ricardo Bermúdez Bermúdez
  * @since  Oct 22th, 2019.
@@ -22,7 +22,7 @@ class ETLExtractException extends Exception
 }
 
 /**
- * Represents the errors in push data process (push or load process).
+ * Represents the errors in push data procedure (push or load process).
  *
  * @author Ricardo Bermúdez Bermúdez
  * @since  Oct 22th, 2019.
@@ -39,10 +39,11 @@ class ETLLoadException extends Exception
  * This class is an abstract of the ETL process. The below class defines the ETL
  * execution process and interfaces to perform this, in other words, it defines
  * the extract and load interfaces. The transformation process is defined by
- * <TransformInterface> that content the bind between old model and new model.
+ * <TransformInterface> that content the link between old model and new model
+ * made by <i>link methods</i>.
  * 
- * @author Ricardo Bermúdez Bermúdez
- * @since  Oct 22th, 2019.
+ * @author  Ricardo Bermúdez Bermúdez
+ * @version Oct 22th, 2019.
  */
 public abstract class ETL<TransformInterface> implements Runnable
 {
@@ -51,7 +52,8 @@ public abstract class ETL<TransformInterface> implements Runnable
   private String etlClassName = "";
     
   /** 
-   * Initialize source and destination connection.
+   * Constructor - Initialize source, destination connection and set the etl
+   * name procedure.
    */
   public ETL()
   {
@@ -87,13 +89,17 @@ public abstract class ETL<TransformInterface> implements Runnable
   }
   
   /**
-   * Retreive data from source connection.
+   * Retreive data from source connection or from origin (fetch procedure).
+   * 
+   * @throws ETLExtractException If this procedure fail.
    */
   abstract public LinkedList<TransformInterface> extract()
     throws ETLExtractException;
 
   /**
-   * Push data over destination store.
+   * Load data over destination store (push procedure).
+   * 
+   * @throws ETLLoadException If this procedure fail.
    */
   abstract public void load(LinkedList<TransformInterface> transformObjectList)
     throws ETLLoadException;
