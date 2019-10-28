@@ -15,12 +15,10 @@ public abstract class ETLCommerce extends ETL<Commerce>
   public void load(LinkedList<Commerce> commerceList)
     throws ETLLoadException
   {
-    Commerce commerce = null;
-
     try {
       destination.startConnection();
 
-      while ( (commerce = commerceList.removeFirst()) != null ) {
+      commerceList.forEach( commerce -> {
         destination.tryInsert(
           "species, class_name, address, lat, lng, pastId",
           "'" + commerce.getSpecies()    + "'," +
@@ -31,11 +29,10 @@ public abstract class ETLCommerce extends ETL<Commerce>
           "'" + commerce.getPastId()     + "'",
           "commerce_list"
         );
-      }
+      });
 
       destination.closeConnection();
     }
-    catch (NoSuchElementException e0) {}
     catch (Exception e1) { throw new ETLLoadException("", e1); }
   }
 }

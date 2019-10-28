@@ -2,6 +2,7 @@ package com.globalhitss.claropay.cercademi_etl.ETL;
 
 import  com.globalhitss.claropay.cercademi_etl.Models.Inbursa;
 import  com.globalhitss.claropay.cercademi_etl.Models.Commerce;
+import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
 
 import java.util.LinkedList;
 import java.sql.ResultSet;
@@ -17,12 +18,11 @@ public class ETLCommerceInbursa extends ETLCommerce
     throws ETLExtractException
   {
     LinkedList inbursaList   = new LinkedList<Inbursa>();
-    ResultSet  inbursaRows = null;
     
     try {
       source.startConnection();
 
-      inbursaRows = source.get(
+      ResultSet inbursaRows = source.get(
         "consecutivo, estado, ciudad_municipio, domicilio",
         "cat_emisores"
       );
@@ -35,6 +35,8 @@ public class ETLCommerceInbursa extends ETLCommerce
           inbursaRows.getString("domicilio")
         ) );
       }
+
+      inbursaList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
     }

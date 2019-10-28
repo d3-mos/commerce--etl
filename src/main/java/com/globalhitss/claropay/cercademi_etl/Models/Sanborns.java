@@ -2,7 +2,7 @@ package com.globalhitss.claropay.cercademi_etl.Models;
 
 
 /** */
-public class Sanborns implements Commerce
+public class Sanborns extends CommerceNoCoords
 {
   private String no_sucursal         = "";
   private String calle_y_numero      = "";
@@ -25,15 +25,12 @@ public class Sanborns implements Commerce
     this.cp                  = cp;
     this.localidad_municipio = localidad_municipio;
     this.estado              = estado;
+    loadCoords();
   }
 
   public String getSpecies()   { return "Sanborns"; }
 
   public String getClassName() { return "null"; }
-
-  public double getLatitude()  { return 0.0; }
- 
-  public double getLongitude() { return 0.0; }
 
   public String getPastId()    { return no_sucursal; }
 

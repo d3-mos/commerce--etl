@@ -74,17 +74,17 @@ public abstract class ConnectionAbstract
 
   /** */
   public void tryInsert(String fields, String values, String table)
-    throws SQLException
   {
-    lastStatement = currentConnection.prepareStatement(
-      "insert into " + table + "(" + fields + ") values (" + values + ")"
-    );
-
     try{
+      lastStatement = currentConnection.prepareStatement(
+        "insert into " + table + "(" + fields + ") values (" + values + ")"
+      );
       lastStatement.execute();
-    } catch(SQLIntegrityConstraintViolationException e) {}
-
-    lastStatement.close();
+      lastStatement.close();
+    }
+    catch(SQLIntegrityConstraintViolationException e) {}
+    catch(java.sql.SQLException e1) {}
+    
     lastStatement = null;
   }
 }

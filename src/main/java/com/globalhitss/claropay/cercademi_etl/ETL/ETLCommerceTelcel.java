@@ -2,24 +2,27 @@ package com.globalhitss.claropay.cercademi_etl.ETL;
 
 import com.globalhitss.claropay.cercademi_etl.Models.Telcel;
 import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
+import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
 
 import java.util.LinkedList;
 import java.sql.ResultSet;
 
+
+/** */
 public class ETLCommerceTelcel extends ETLCommerce
 {
+
   /** */
   @Override
   public LinkedList<Commerce> extract() 
     throws ETLExtractException
   {
-    LinkedList telcelList = new LinkedList<Telcel>();
-    ResultSet  telcelRows = null;
+    LinkedList<Commerce> telcelList = new LinkedList<Commerce>();
     
     try {
       source.startConnection();
 
-      telcelRows = source.get(
+      ResultSet telcelRows = source.get(
         "id_corresponsal, estado, ciudad, delegacion,"
        +"colonia, calle, numero, cp",
         "cat_telcel"
@@ -37,6 +40,8 @@ public class ETLCommerceTelcel extends ETLCommerce
           telcelRows.getString("cp")
         ) );
       }
+
+      telcelList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
     }

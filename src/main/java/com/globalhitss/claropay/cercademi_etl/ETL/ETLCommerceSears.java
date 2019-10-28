@@ -2,6 +2,7 @@ package com.globalhitss.claropay.cercademi_etl.ETL;
 
 import com.globalhitss.claropay.cercademi_etl.Models.Sears;
 import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
+import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
 
 import java.util.LinkedList;
 import java.sql.ResultSet;
@@ -16,13 +17,12 @@ public class ETLCommerceSears extends ETLCommerce
   public LinkedList<Commerce> extract() 
     throws ETLExtractException
   {
-    LinkedList searsList = new LinkedList<Sears>();
-    ResultSet  searsRows = null;
+    LinkedList<Commerce> searsList = new LinkedList<Commerce>();
     
     try {
       source.startConnection();
 
-      searsRows = source.get(
+      ResultSet searsRows = source.get(
         "no_tienda, direccion",
         "cat_sears"
       );
@@ -33,6 +33,8 @@ public class ETLCommerceSears extends ETLCommerce
           searsRows.getString("direccion")
         ) );
       }
+
+      searsList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
     }

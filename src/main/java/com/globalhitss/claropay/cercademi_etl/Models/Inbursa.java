@@ -2,7 +2,7 @@ package com.globalhitss.claropay.cercademi_etl.Models;
 
 
 /** */
-public class Inbursa implements Commerce
+public class Inbursa extends CommerceNoCoords
 {
   private String consecutivo;
   private String estado;
@@ -19,15 +19,12 @@ public class Inbursa implements Commerce
     this.estado           = estado;
     this.ciudad_municipio = ciudad_municipio;
     this.domicilio        = domicilio;
+    loadCoords();
   }
 
   public String getSpecies()   { return "Inbursa"; }
 
   public String getClassName() { return "null"; }
-
-  public double getLatitude()  { return 0.0; }
- 
-  public double getLongitude() { return 0.0; }
 
   public String getPastId() { return consecutivo; }
 
