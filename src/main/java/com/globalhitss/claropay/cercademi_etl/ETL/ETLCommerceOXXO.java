@@ -7,10 +7,25 @@ import java.util.LinkedList;
 import java.sql.ResultSet;
 
 
-/** */
+/**
+ * This custom ETL, implements the extract procedure to fetch all data from
+ * cat_oxxo table in origin database.
+ * 
+ * @author  Ricardo Bermúdez Bermúdez
+ * @version 1.0.0, Oct 23th, 2019.
+ * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
+ * @see     com.globalhitss.claropay.cercademi_etl.Models.OXXO
+ * @see     ETL
+ * @see     ETLCommerce
+ */
 public class ETLCommerceOXXO extends ETLCommerce
 {
-  /** */
+
+  /**
+   * {@inheritDoc}
+   * 
+   * It's the custom extract procedure implementation to OXXO objects.
+   */
   @Override
   public LinkedList<Commerce> extract() 
     throws ETLExtractException
