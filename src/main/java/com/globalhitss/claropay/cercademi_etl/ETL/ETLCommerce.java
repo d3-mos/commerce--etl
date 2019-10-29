@@ -3,7 +3,6 @@ package com.globalhitss.claropay.cercademi_etl.ETL;
 import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
 
 import java.util.LinkedList;
-import java.util.NoSuchElementException;
 
 
 /** 

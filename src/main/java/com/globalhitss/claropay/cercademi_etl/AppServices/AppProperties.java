@@ -1,7 +1,6 @@
 package com.globalhitss.claropay.cercademi_etl.AppServices;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 

@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.webservices;
+package com.globalhitss.claropay.cercademi_etl.WebServices;
 
 import com.globalhitss.claropay.cercademi_etl.AppServices.AppProperties;
 
