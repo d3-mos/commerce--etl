@@ -25,6 +25,12 @@
         <env>production</env>
       </properties>
     </profile>
+    <profile>
+      <id>testing</id>
+      <properties>
+        <env>testing</env>
+      </properties>
+    </profile>
   </profiles>
 
   <!-- PROJECT DEPENDENCIES. -->
