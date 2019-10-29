@@ -1,6 +1,7 @@
 #Ignore environments configuration
 src/main/resources/env/config.development.properties
 src/main/resources/env/config.production.properties
+src/main/resources/env/config.testing.properties
 
 #Ignore build path
 target/
