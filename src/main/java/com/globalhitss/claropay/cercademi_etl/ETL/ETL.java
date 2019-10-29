@@ -15,12 +15,16 @@ import java.lang.Runnable;
  */
 class ETLExtractException extends Exception 
 {
+  /** *
+	 */
+	private static final long serialVersionUID = 1L;
+
   public ETLExtractException(String message, Exception cause)
   {
     super(message, cause);
   }
 }
-
+ 
 /**
  * Represents the errors in push data procedure (push or load process).
  *
@@ -29,6 +33,10 @@ class ETLExtractException extends Exception
  */
 class ETLLoadException extends Exception 
 {
+  /** *
+	 */
+	private static final long serialVersionUID = 1L;
+
   public ETLLoadException(String message, Exception cause)
   {
     super(message, cause);
@@ -37,7 +45,7 @@ class ETLLoadException extends Exception
 
 /**
  * This class is an abstract of the ETL process. The below class defines the ETL
- * execution process and interfaces to perform this, in other words, it defines
+ * executi  process and interfaces to perform this, in other words, it defines
  * the extract and load interfaces. The transformation process is defined by
  * <TransformInterface> that content the link between old model and new model
  * made by <i>link methods</i>.

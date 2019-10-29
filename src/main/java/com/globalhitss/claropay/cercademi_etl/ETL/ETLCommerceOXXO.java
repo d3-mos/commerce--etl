@@ -30,7 +30,7 @@ public class ETLCommerceOXXO extends ETLCommerce
   public LinkedList<Commerce> extract() 
     throws ETLExtractException
   { 
-    LinkedList oxxoList = new LinkedList<OXXO>();
+    LinkedList<Commerce> oxxoList = new LinkedList<Commerce>();
     ResultSet  oxxoRows = null;
     
     try {

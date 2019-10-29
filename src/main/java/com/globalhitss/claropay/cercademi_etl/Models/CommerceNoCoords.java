@@ -1,8 +1,7 @@
 package com.globalhitss.claropay.cercademi_etl.Models;
 
-import com.globalhitss.claropay.cercademi_etl.webservices.GoogleGeoCoding;
+import com.globalhitss.claropay.cercademi_etl.WebServices.GoogleGeoCoding;
 
-import com.google.maps.model.LatLng;
 import java.util.concurrent.CompletableFuture;
 
 

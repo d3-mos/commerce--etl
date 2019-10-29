@@ -8,3 +8,4 @@ target/
 
 #Ignore eclipse configuration project
 .project
+.settings

@@ -1,6 +1,5 @@
 package com.globalhitss.claropay.cercademi_etl.DataBase;
 
-import java.lang.ClassNotFoundException;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;

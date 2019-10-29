@@ -47,8 +47,6 @@ public class ETLCommerceInbursa extends ETLCommerce
       while (inbursaRows.next()) {
         inbursaList.add( new Inbursa(
           inbursaRows.getString("consecutivo"),
-          inbursaRows.getString("estado"),
-          inbursaRows.getString("ciudad_municipio"),
           inbursaRows.getString("domicilio")
         ) );
       }
