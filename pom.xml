@@ -61,6 +61,7 @@
   <!-- BUILD CONFIGURATION. -->
   <build>
     <sourceDirectory>src</sourceDirectory>
+    
     <!-- Loading properties file according with environment. -->
     <filters>
       <filter>src/main/resources/env/config.${env}.properties</filter>
@@ -101,25 +102,34 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.1.1</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
             <goals>
-              <goal>single</goal>
+              <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <archive>
-                <manifest>
-                  <mainClass>com.globalhitss.claropay.cercademi_etl.App</mainClass>
-                </manifest>
-              </archive>
-              <descriptorRefs>
-                <descriptorRef>${env}-release</descriptorRef>
-              </descriptorRefs>
+              <outputDirectory>${project.build.directory}/libs</outputDirectory>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>libs/</classpathPrefix>
+              <mainClass>com.globalhitss.claropay.cercademi_etl.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
       </plugin>
     </plugins>
   </build>
