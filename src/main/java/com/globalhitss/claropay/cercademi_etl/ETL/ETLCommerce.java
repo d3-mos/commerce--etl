@@ -35,7 +35,7 @@ public abstract class ETLCommerce extends ETL<Commerce>
       destination.startConnection();
 
       commerceList.forEach( commerce -> destination.tryInsert(
-          "species, class_name, address, lat, lng, pastId",
+          "species, class_name, address, lat, lng, past_id",
           "'" + commerce.getSpecies()    + "'," +
           " " + commerce.getClassName()  + "," +
           "'" + commerce.getAddress()    + "'," +
