@@ -5,8 +5,8 @@
   
     <!-- MAIN SETTINGS -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.globalhitss.claropay</groupId>
-    <artifactId>cercademi_etl</artifactId>
+    <groupId>com.globalhitss.claropay.cercademi</groupId>
+    <artifactId>job.storegeolocation</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
     <name>cercademi_etl</name>
@@ -95,7 +95,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.6.0</version>
           <configuration>
-            <mainClass>com.globalhitss.claropay.cercademi_etl.App</mainClass>
+            <mainClass>com.globalhitss.claropay.cercademi.job.storegeolocation.App</mainClass>
           </configuration>
         </plugin>
         <plugin>
@@ -113,7 +113,7 @@
             </descriptorRefs>
             <archive>
               <manifest>
-                <mainClass>com.globalhitss.claropay.cercademi_etl.App</mainClass>
+                <mainClass>com.globalhitss.claropay.cercademi.job.storegeolocation.App</mainClass>
               </manifest>
             </archive>
           </configuration>

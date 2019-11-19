@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 
 /**
@@ -19,6 +19,7 @@ public class Sanborns extends CommerceNoCoords
   private String cp                  = "";
   private String localidad_municipio = "";
   private String estado              = "";
+  private int brand;
 
   /**
    * Constructor - Initializes the Sanborns object data. Moreover, it starts the
@@ -37,7 +38,8 @@ public class Sanborns extends CommerceNoCoords
     String colonia,
     String cp,
     String localidad_municipio,
-    String estado
+    String estado,
+    int brand
   ){
     this.no_sucursal         = no_sucursal;
     this.calle_y_numero      = calle_y_numero;
@@ -45,18 +47,14 @@ public class Sanborns extends CommerceNoCoords
     this.cp                  = cp;
     this.localidad_municipio = localidad_municipio;
     this.estado              = estado;
+    this.brand = brand;
     loadCoords();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getSpecies()   { return "Sanborns"; }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getClassName() { return "null"; }
+  public int getBrand() { return this.brand; }
 
   /**
    * {@inheritDoc}

@@ -1,10 +1,11 @@
-package com.globalhitss.claropay.cercademi_etl.ETL;
-
-import com.globalhitss.claropay.cercademi_etl.Models.Sears;
-import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
-import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
 
 import java.util.LinkedList;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sears;
+
 import java.sql.ResultSet;
 
 
@@ -14,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
- * @see     com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Sears
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sears
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -38,22 +39,32 @@ public class ETLCommerceSears extends ETLCommerce
     
     try {
       source.startConnection();
+      destination.startConnection();
 
-      ResultSet searsRows = source.get(
+      ResultSet searsRows = source.getUpdatedRows(
         "no_tienda, direccion",
-        "cat_sears"
+        "cat_sears",
+        "last_change_ts"
       );
-
+      ResultSet brandToken = destination.get(
+        "STORE_ID",
+        "CAT_STORE",
+        "STORE='Sears'"
+      );
+      brandToken.next();
+        
       while (searsRows.next()) {
         searsList.add( new Sears(
           searsRows.getString("no_tienda"),
-          searsRows.getString("direccion")
+          searsRows.getString("direccion"),
+          brandToken.getInt("STORE_ID")
         ) );
       }
 
       searsList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
+      destination.closeConnection();
     }
     catch (Exception e0) { throw new ETLExtractException("", e0); }
 

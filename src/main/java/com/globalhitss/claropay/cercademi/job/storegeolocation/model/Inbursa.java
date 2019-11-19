@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 
 /**
@@ -15,6 +15,7 @@ public class Inbursa extends CommerceNoCoords
 {
   private String consecutivo;
   private String domicilio;
+  private int brand;
 
   /**
    * Constructor - Initializes the Inbursa object data. Moreover, it starts the
@@ -27,22 +28,19 @@ public class Inbursa extends CommerceNoCoords
    */
   public Inbursa(
     String consecutivo,
-    String domicilio
+    String domicilio,
+    int brand
   ) {
-    this.consecutivo      = consecutivo;
-    this.domicilio        = domicilio;
+    this.consecutivo = consecutivo;
+    this.domicilio   = domicilio;
+    this.brand       = brand;
     loadCoords();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getSpecies()   { return "Inbursa"; }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getClassName() { return "null"; }
+  public int getBrand()   { return this.brand; }
 
   /**
    * {@inheritDoc}

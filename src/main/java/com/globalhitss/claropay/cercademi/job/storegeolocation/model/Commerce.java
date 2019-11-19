@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 /**
  * This class describe the commerce interface to retrieve the data values of a
@@ -18,13 +18,7 @@ public interface Commerce
    * Link method - This method is use to retrieve the commerce species such as
    * "OXXO", "Inbursa", "Sears", etc.
    */
-  public String getSpecies();
-
-  /**
-   * Link method - This method is use to retrieve the commerce class such as
-   * "ACEPTA_PAGO", "RETIRAR", etc.
-   */
-  public String getClassName();
+  public int getBrand();
 
   /**
    * Link method - This method is use to retrieves the commerce address builded

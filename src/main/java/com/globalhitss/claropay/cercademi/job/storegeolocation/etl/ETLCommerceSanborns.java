@@ -1,10 +1,11 @@
-package com.globalhitss.claropay.cercademi_etl.ETL;
-
-import com.globalhitss.claropay.cercademi_etl.Models.Sanborns;
-import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
-import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
 
 import java.util.LinkedList;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sanborns;
+
 import java.sql.ResultSet;
 
 
@@ -14,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
- * @see     com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Sanborns
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sanborns
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -38,11 +39,19 @@ public class ETLCommerceSanborns extends ETLCommerce
     
     try {
       source.startConnection();
+      destination.startConnection();
 
-      ResultSet sanbornsRows = source.get(
+      ResultSet sanbornsRows = source.getUpdatedRows(
         "no_sucursal, calle_y_numero, colonia, cp, localidad_municipio, estado",
-        "cat_sanborns"
+        "cat_sanborns",
+        "last_change_ts"
       );
+      ResultSet brandToken = destination.get(
+        "STORE_ID",
+        "CAT_STORE",
+        "STORE='Sears'"
+      );
+      brandToken.next();
 
       while (sanbornsRows.next()) {
         sanbornsList.add(new Sanborns(
@@ -51,13 +60,15 @@ public class ETLCommerceSanborns extends ETLCommerce
           sanbornsRows.getString("colonia"),
           sanbornsRows.getString("cp"),
           sanbornsRows.getString("localidad_municipio"),
-          sanbornsRows.getString("estado")
+          sanbornsRows.getString("estado"),
+          brandToken.getInt("STORE_ID")
         ));
       }
 
       sanbornsList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
       
       source.closeConnection();
+      destination.closeConnection();
     }
     catch (Exception e0) { throw new ETLExtractException("", e0); }
 

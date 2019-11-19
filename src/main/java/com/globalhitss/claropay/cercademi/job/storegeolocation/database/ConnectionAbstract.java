@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.DataBase;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.database;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -87,6 +87,24 @@ public abstract class ConnectionAbstract
     if (lastStatement!=null) lastStatement.close();
   }
 
+  public ResultSet get(
+      String fields, 
+      String table, 
+      String where
+  ) 
+    throws SQLException
+  {
+    
+    System.out.println(        "select " + fields + " from " + table +
+        (where!=null ? " where " + where : ""));
+      lastStatement = currentConnection.prepareStatement(
+        "select " + fields + " from " + table +
+        (where!=null ? " where " + where : "")
+      );
+      
+      return lastStatement.executeQuery();
+  }
+  
   /**
    * This method build a SQL select sentence with the next form:
    * <code>select <fields> from <table></code>. It runs the query and returns 
@@ -94,14 +112,20 @@ public abstract class ConnectionAbstract
    * 
    * @param  fields Comma separated fields.
    * @param  table  Table reference.
+   * @param  updatedFieldRef Reference of timestamp of update action.
    * @return Results of query performance.
    * @throws SQLException When query fall.
    */
-  public ResultSet get(String fields, String table) 
+  public ResultSet getUpdatedRows(
+    String fields, 
+    String table, 
+    String updatedFieldRef
+  ) 
     throws SQLException
   {
     lastStatement = currentConnection.prepareStatement(
-      "select " + fields + " from " + table
+      "select " + fields + " from " + table +
+      " where " + updatedFieldRef + " between CURRENT_DATE and CURRENT_TIMESTAMP"
     );
     
     return lastStatement.executeQuery();
@@ -119,7 +143,7 @@ public abstract class ConnectionAbstract
    */
   public void tryInsert(String fields, String values, String table)
   {
-    try{
+    try {
       lastStatement = currentConnection.prepareStatement(
         "insert into " + table + "(" + fields + ") values (" + values + ")"
       );
@@ -130,5 +154,57 @@ public abstract class ConnectionAbstract
     catch(java.sql.SQLException e1) {}
     
     lastStatement = null;
+  }
+  
+  /***/
+  public void tryUpdate(
+    String fields,
+    String values,
+    String table,
+    String condition,
+    boolean ifnotexistInsert
+  ) {
+    try {
+      lastStatement = currentConnection.prepareStatement(
+        "select count(*) as total from " + table + " where " + condition
+      );
+      ResultSet selectRes = lastStatement.executeQuery();
+      selectRes.next();
+      int total = selectRes.getInt("total"); 
+      
+      if (total >  1) { throw new Exception("Mas de un registro."); }
+      if (total == 1) { tryUpdate(fields, values, table, condition); }
+      if (total == 0 && ifnotexistInsert) { tryInsert(fields, values, table); }
+    }
+    catch(Exception e2) { e2.printStackTrace(); }
+  }
+  
+  /***/
+  public void tryUpdate(
+    String fields,
+    String values,
+    String table,
+    String condition
+  )  {
+    String[] fieldArray   = fields.split(",");
+    String[] valuesArray  = values.split(",");
+    String   updateFormat = "";
+    
+    int i=0;
+    for(i=0; i<fieldArray.length - 1; i++) {
+      updateFormat=fieldArray[i] + "=" + valuesArray[i] + ",";
+    }
+    updateFormat = fieldArray[i] + "=" + valuesArray[i];
+    
+    try {
+      lastStatement = currentConnection.prepareStatement(
+          "update " + table
+        + " set "   + updateFormat
+        + " where " + condition
+      );
+      
+      lastStatement.execute();
+      lastStatement.close();
+    } catch(Exception e) {}
   }
 }

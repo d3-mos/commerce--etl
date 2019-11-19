@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 
 /**
@@ -22,7 +22,8 @@ public class OXXO implements Commerce
   private String estado         = "";
   private double latitud        = 0.0;
   private double longitud       = 0.0;
-
+  private int brand;
+  
   /**
    * Constructor - Initializes the Inbursa object data.
    *
@@ -45,28 +46,25 @@ public class OXXO implements Commerce
     String ciudad,
     String estado,
     double latitud,
-    double longitud
+    double longitud,
+    int brand
   ){
-    this.concatenado    = concatenado;
-    this.calle          = calle;
-    this.numero         = numero;
-    this.colonia        = colonia;
-    this.codigo         = codigo;
-    this.ciudad         = ciudad;
-    this.estado         = estado;
-    this.latitud        = latitud;
-    this.longitud       = longitud;
+    this.concatenado = concatenado;
+    this.calle       = calle;
+    this.numero      = numero;
+    this.colonia     = colonia;
+    this.codigo      = codigo;
+    this.ciudad      = ciudad;
+    this.estado      = estado;
+    this.latitud     = latitud;
+    this.longitud    = longitud;
+    this.brand       = brand;
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getSpecies()   { return "OXXO"; }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getClassName() { return "null"; }
+  public int getBrand()   { return this.brand; }
  
   /**
    * {@inheritDoc}
