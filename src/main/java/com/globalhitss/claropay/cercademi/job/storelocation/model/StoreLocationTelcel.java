@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 
 /**
@@ -8,10 +8,10 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  *
  * @author  Ricardo Bermúdez Bermudez
  * @version 1.0.0, Oct 22th, 2019.
- * @see     Commerce
- * @see     CommerceNoCoords
+ * @see     StoreLocation
+ * @see     StoreLocationNoCoords
  */
-public class Telcel extends CommerceNoCoords
+public class StoreLocationTelcel extends StoreLocationNoCoords
 {
   private String id_corresponsal = "";
   private String estado          = "";
@@ -35,7 +35,7 @@ public class Telcel extends CommerceNoCoords
    * @param numero          Part of address.
    * @param cp              Part of address.
    */
-  public Telcel (
+  public StoreLocationTelcel (
     String id_corresponsal,
     String estado,
     String ciudad,

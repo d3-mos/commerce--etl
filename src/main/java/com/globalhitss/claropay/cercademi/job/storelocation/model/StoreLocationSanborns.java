@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 
 /**
@@ -8,10 +8,10 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  *
  * @author  Ricardo Bermúdez Bermudez
  * @version 1.0.0, Oct 22th, 2019.
- * @see     Commerce
- * @see     CommerceNoCoords
+ * @see     StoreLocation
+ * @see     StoreLocationNoCoords
  */
-public class Sanborns extends CommerceNoCoords
+public class StoreLocationSanborns extends StoreLocationNoCoords
 {
   private String no_sucursal         = "";
   private String calle_y_numero      = "";
@@ -32,7 +32,7 @@ public class Sanborns extends CommerceNoCoords
    * @param localidad_municipio Part of address.
    * @param estado              Part of address.
    */
-  public Sanborns(
+  public StoreLocationSanborns(
     String no_sucursal,
     String calle_y_numero,
     String colonia,

@@ -1,9 +1,9 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.OXXO;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationOXXO;
 
 import java.sql.ResultSet;
 
@@ -14,8 +14,8 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.OXXO
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationOXXO
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -28,10 +28,10 @@ public class ETLCommerceOXXO extends ETLCommerce
    * It's the custom extract procedure implementation to OXXO objects.
    */
   @Override
-  public LinkedList<Commerce> extract() 
+  public LinkedList<StoreLocation> extract() 
     throws ETLExtractException
   { 
-    LinkedList<Commerce> oxxoList = new LinkedList<Commerce>();
+    LinkedList<StoreLocation> oxxoList = new LinkedList<StoreLocation>();
     
     try {
       source.startConnection();
@@ -53,7 +53,7 @@ public class ETLCommerceOXXO extends ETLCommerce
       brandToken.next();
       
       while (oxxoRows.next()) {
-        oxxoList.add( new OXXO(
+        oxxoList.add( new StoreLocationOXXO(
           oxxoRows.getString("concatenado"),
           oxxoRows.getString("calle"),
           oxxoRows.getString("numero"),

@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 
 /**
@@ -8,10 +8,10 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  *
  * @author  Ricardo Bermúdez Bermudez
  * @version 1.0.0, Oct 22th, 2019.
- * @see     Commerce
- * @see     CommerceNoCoords
+ * @see     StoreLocation
+ * @see     StoreLocationNoCoords
  */
-public class Sears extends CommerceNoCoords
+public class StoreLocationSears extends StoreLocationNoCoords
 {
   private String no_tienda;
   private String direccion;
@@ -24,7 +24,7 @@ public class Sears extends CommerceNoCoords
    * @param no_sucursal    Before ID.
    * @param calle_y_numero Location address.
    */
-  public Sears(
+  public StoreLocationSears(
     String no_tienda,
     String direccion,
     int brand

@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Inbursa;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationInbursa;
 
 import java.sql.ResultSet;
 
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Inbursa
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationInbursa
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -32,10 +32,10 @@ public class ETLCommerceInbursa extends ETLCommerce
    * commerce.
    */
   @Override
-  public LinkedList<Commerce> extract()
+  public LinkedList<StoreLocation> extract()
     throws ETLExtractException
   {
-    LinkedList<Commerce> inbursaList = new LinkedList<Commerce>();
+    LinkedList<StoreLocation> inbursaList = new LinkedList<StoreLocation>();
     
     try {
       source.startConnection();
@@ -55,14 +55,14 @@ public class ETLCommerceInbursa extends ETLCommerce
       brandToken.next();
       
       while (inbursaRows.next()) {
-        inbursaList.add( new Inbursa(
+        inbursaList.add( new StoreLocationInbursa(
           inbursaRows.getString("consecutivo"),
           inbursaRows.getString("domicilio"),
           brandToken.getInt("STORE_ID")
         ) );
       }
 
-      inbursaList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
+      inbursaList.forEach(obj -> ((StoreLocationNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
       destination.closeConnection();

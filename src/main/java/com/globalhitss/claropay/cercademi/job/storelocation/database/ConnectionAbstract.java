@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.database;
+package com.globalhitss.claropay.cercademi.job.storelocation.database;
 
 import java.sql.DriverManager;
 import java.sql.Connection;

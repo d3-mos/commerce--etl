@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sears;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationSears;
 
 import java.sql.ResultSet;
 
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sears
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationSears
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -32,10 +32,10 @@ public class ETLCommerceSears extends ETLCommerce
    * commerce.
    */
   @Override
-  public LinkedList<Commerce> extract() 
+  public LinkedList<StoreLocation> extract() 
     throws ETLExtractException
   {
-    LinkedList<Commerce> searsList = new LinkedList<Commerce>();
+    LinkedList<StoreLocation> searsList = new LinkedList<StoreLocation>();
     
     try {
       source.startConnection();
@@ -54,14 +54,14 @@ public class ETLCommerceSears extends ETLCommerce
       brandToken.next();
         
       while (searsRows.next()) {
-        searsList.add( new Sears(
+        searsList.add( new StoreLocationSears(
           searsRows.getString("no_tienda"),
           searsRows.getString("direccion"),
           brandToken.getInt("STORE_ID")
         ) );
       }
 
-      searsList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
+      searsList.forEach(obj -> ((StoreLocationNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
       destination.closeConnection();

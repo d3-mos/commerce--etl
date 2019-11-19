@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Telcel;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationTelcel;
 
 import java.sql.ResultSet;
 
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Telcel
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationTelcel
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -32,10 +32,10 @@ public class ETLCommerceTelcel extends ETLCommerce
    * commerce.
    */
   @Override
-  public LinkedList<Commerce> extract() 
+  public LinkedList<StoreLocation> extract() 
     throws ETLExtractException
   {
-    LinkedList<Commerce> telcelList = new LinkedList<Commerce>();
+    LinkedList<StoreLocation> telcelList = new LinkedList<StoreLocation>();
     
     try {
       source.startConnection();
@@ -55,7 +55,7 @@ public class ETLCommerceTelcel extends ETLCommerce
       brandToken.next();
 
       while (telcelRows.next()) {
-        telcelList.add( new Telcel(
+        telcelList.add( new StoreLocationTelcel(
           telcelRows.getString("id_corresponsal"),
           telcelRows.getString("estado"),
           telcelRows.getString("ciudad"),
@@ -67,7 +67,7 @@ public class ETLCommerceTelcel extends ETLCommerce
         ) );
       }
 
-      telcelList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
+      telcelList.forEach(obj -> ((StoreLocationNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
       destination.closeConnection();

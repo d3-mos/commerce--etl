@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.database.ConnectionAbstract;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.database.DestinationConnection;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.database.SourceConnection;
+import com.globalhitss.claropay.cercademi.job.storelocation.database.ConnectionAbstract;
+import com.globalhitss.claropay.cercademi.job.storelocation.database.DestinationConnection;
+import com.globalhitss.claropay.cercademi.job.storelocation.database.SourceConnection;
 
 import java.lang.Runnable;
 

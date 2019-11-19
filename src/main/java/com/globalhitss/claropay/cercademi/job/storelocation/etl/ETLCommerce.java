@@ -1,8 +1,8 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
 
 
 /** 
@@ -10,14 +10,14 @@ import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
  * 
  * It sets the load procedure custom to Commerce structure. To goal this,
  * the structure to load MUST implements the
- * {@link com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce} interface.
+ * {@link com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation} interface.
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
  * @see     ETL
  */
-public abstract class ETLCommerce extends ETL<Commerce>
+public abstract class ETLCommerce extends ETL<StoreLocation>
 {
   
   /**
@@ -28,7 +28,7 @@ public abstract class ETLCommerce extends ETL<Commerce>
    * @throws ETLLoadException If an error occur over this procedure.
    */
   @Override
-  public void load(LinkedList<Commerce> commerceList)
+  public void load(LinkedList<StoreLocation> commerceList)
     throws ETLLoadException
   {
     try {

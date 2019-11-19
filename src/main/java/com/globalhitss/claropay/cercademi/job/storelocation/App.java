@@ -1,13 +1,13 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation;
+package com.globalhitss.claropay.cercademi.job.storelocation;
 
 import java.lang.Thread;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.config.AppProperties;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.etl.ETLCommerceInbursa;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.etl.ETLCommerceOXXO;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.etl.ETLCommerceSanborns;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.etl.ETLCommerceSears;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.etl.ETLCommerceTelcel;
+import com.globalhitss.claropay.cercademi.job.storelocation.config.AppProperties;
+import com.globalhitss.claropay.cercademi.job.storelocation.etl.ETLCommerceInbursa;
+import com.globalhitss.claropay.cercademi.job.storelocation.etl.ETLCommerceOXXO;
+import com.globalhitss.claropay.cercademi.job.storelocation.etl.ETLCommerceSanborns;
+import com.globalhitss.claropay.cercademi.job.storelocation.etl.ETLCommerceSears;
+import com.globalhitss.claropay.cercademi.job.storelocation.etl.ETLCommerceTelcel;
 
 
 /**

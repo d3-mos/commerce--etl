@@ -1,10 +1,10 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
+package com.globalhitss.claropay.cercademi.job.storelocation.etl;
 
 import java.util.LinkedList;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
-import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sanborns;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords;
+import com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationSanborns;
 
 import java.sql.ResultSet;
 
@@ -15,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Sanborns
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocation
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storelocation.model.StoreLocationSanborns
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -32,10 +32,10 @@ public class ETLCommerceSanborns extends ETLCommerce
    * commerce.
    */
   @Override
-  public LinkedList<Commerce> extract() 
+  public LinkedList<StoreLocation> extract() 
     throws ETLExtractException
   { 
-    LinkedList<Commerce> sanbornsList = new LinkedList<Commerce>();
+    LinkedList<StoreLocation> sanbornsList = new LinkedList<StoreLocation>();
     
     try {
       source.startConnection();
@@ -54,7 +54,7 @@ public class ETLCommerceSanborns extends ETLCommerce
       brandToken.next();
 
       while (sanbornsRows.next()) {
-        sanbornsList.add(new Sanborns(
+        sanbornsList.add(new StoreLocationSanborns(
           sanbornsRows.getString("no_sucursal"),
           sanbornsRows.getString("calle_y_numero"),
           sanbornsRows.getString("colonia"),
@@ -65,7 +65,7 @@ public class ETLCommerceSanborns extends ETLCommerce
         ));
       }
 
-      sanbornsList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
+      sanbornsList.forEach(obj -> ((StoreLocationNoCoords) obj).waitingByCoords());
       
       source.closeConnection();
       destination.closeConnection();

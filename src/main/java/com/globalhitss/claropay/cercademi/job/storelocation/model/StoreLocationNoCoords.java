@@ -1,8 +1,8 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.globalhitss.claropay.cercademi.job.storegeolocation.service.GoogleGeoCoding;
+import com.globalhitss.claropay.cercademi.job.storelocation.service.GoogleGeoCoding;
 
 
 /**
@@ -12,10 +12,10 @@ import com.globalhitss.claropay.cercademi.job.storegeolocation.service.GoogleGeo
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 21th, 2019
- * @see     Commerce
+ * @see     StoreLocation
  * @see     com.globalhitss.claropay.cercademi_etl.webservices.GoogleGeoCoding
  */
-public abstract class CommerceNoCoords implements Commerce
+public abstract class StoreLocationNoCoords implements StoreLocation
 {
   private double lat = 0.0;
   private double lng = 0.0;

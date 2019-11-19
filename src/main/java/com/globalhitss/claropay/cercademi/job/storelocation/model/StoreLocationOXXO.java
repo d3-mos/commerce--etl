@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 
 /**
@@ -8,10 +8,10 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  *
  * @author  Ricardo Bermúdez Bermudez
  * @version 1.0.0, Oct 22th, 2019.
- * @see     Commerce
- * @see     CommerceNoCoords
+ * @see     StoreLocation
+ * @see     StoreLocationNoCoords
  */
-public class OXXO implements Commerce
+public class StoreLocationOXXO implements StoreLocation
 {
   private String concatenado    = "";
   private String calle          = "";
@@ -37,7 +37,7 @@ public class OXXO implements Commerce
    * @param latitud     Part of coordinates.
    * @param longitud    Part of coordinates.
    */
-  public OXXO(
+  public StoreLocationOXXO(
     String concatenado,
     String calle,
     String numero,

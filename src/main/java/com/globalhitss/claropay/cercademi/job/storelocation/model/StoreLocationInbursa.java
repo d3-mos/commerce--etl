@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 
 /**
@@ -8,10 +8,10 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  *
  * @author  Ricardo Bermúdez Bermudez
  * @version 1.0.0, Oct 22th, 2019.
- * @see     Commerce
- * @see     CommerceNoCoords
+ * @see     StoreLocation
+ * @see     StoreLocationNoCoords
  */
-public class Inbursa extends CommerceNoCoords
+public class StoreLocationInbursa extends StoreLocationNoCoords
 {
   private String consecutivo;
   private String domicilio;
@@ -26,7 +26,7 @@ public class Inbursa extends CommerceNoCoords
    * @param ciudad_municipio Part of address.
    * @param domicilio        Part of address.
    */
-  public Inbursa(
+  public StoreLocationInbursa(
     String consecutivo,
     String domicilio,
     int brand

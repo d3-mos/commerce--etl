@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
+package com.globalhitss.claropay.cercademi.job.storelocation.model;
 
 /**
  * This class describe the commerce interface to retrieve the data values of a
@@ -12,7 +12,7 @@ package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 21th, 2019.
  */
-public interface Commerce
+public interface StoreLocation
 {
   /**
    * Link method - This method is use to retrieve the commerce species such as
