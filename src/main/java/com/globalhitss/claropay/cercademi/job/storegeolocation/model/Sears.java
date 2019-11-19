@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 
 /**
@@ -15,7 +15,8 @@ public class Sears extends CommerceNoCoords
 {
   private String no_tienda;
   private String direccion;
-
+  private int brand;
+  
   /**
    * Constructor - Initializes the Sanborns object data. Moreover, it starts the
    * process to retrieve the coordinates.
@@ -25,10 +26,12 @@ public class Sears extends CommerceNoCoords
    */
   public Sears(
     String no_tienda,
-    String direccion
+    String direccion,
+    int brand
   ) {
     this.no_tienda = no_tienda;
     this.direccion = direccion;
+    this.brand = brand;
     loadCoords();
   }
 
@@ -36,12 +39,7 @@ public class Sears extends CommerceNoCoords
   /**
    * {@inheritDoc}
    */
-  public String getSpecies()   { return "Sears"; }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getClassName() { return "null"; }
+  public int getBrand() { return this.brand; }
 
   /**
    * {@inheritDoc}

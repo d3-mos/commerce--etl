@@ -1,9 +1,10 @@
-package com.globalhitss.claropay.cercademi_etl.ETL;
-
-import com.globalhitss.claropay.cercademi_etl.Models.OXXO;
-import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
 
 import java.util.LinkedList;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.OXXO;
+
 import java.sql.ResultSet;
 
 
@@ -13,8 +14,8 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
- * @see     com.globalhitss.claropay.cercademi_etl.Models.OXXO
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.OXXO
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -31,18 +32,26 @@ public class ETLCommerceOXXO extends ETLCommerce
     throws ETLExtractException
   { 
     LinkedList<Commerce> oxxoList = new LinkedList<Commerce>();
-    ResultSet  oxxoRows = null;
     
     try {
       source.startConnection();
+      destination.startConnection();
 
-      oxxoRows = source.get(
+      ResultSet  oxxoRows = source.getUpdatedRows(
         "concatenado, calle, numero, colonia, codigo, "
        +"ciudad, estado, "
        +"latitud, longitud",
-        "cat_oxxo"
+        "cat_oxxo",
+        "last_change_ts"
       );
-
+      
+      ResultSet brandToken = destination.get(
+        "STORE_ID",
+        "CAT_STORE",
+        "STORE='OXXO'"
+      );
+      brandToken.next();
+      
       while (oxxoRows.next()) {
         oxxoList.add( new OXXO(
           oxxoRows.getString("concatenado"),
@@ -53,11 +62,13 @@ public class ETLCommerceOXXO extends ETLCommerce
           oxxoRows.getString("ciudad"),
           oxxoRows.getString("estado"),
           oxxoRows.getDouble("latitud"),
-          oxxoRows.getDouble("longitud")
+          oxxoRows.getDouble("longitud"),
+          brandToken.getInt("STORE_ID")
         ) );
       }
 
       source.closeConnection();
+      destination.closeConnection();
     }
     catch (Exception e0) { throw new ETLExtractException("", e0); }
 

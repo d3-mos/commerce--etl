@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 
 /**
@@ -13,16 +13,15 @@ package com.globalhitss.claropay.cercademi_etl.Models;
  */
 public class Telcel extends CommerceNoCoords
 {
-  String id_corresponsal = "";
-  String estado          = "";
-  String ciudad          = "";
-  String delegacion      = "";
-  String colonia         = "";
-  String calle           = "";
-  String numero          = "";
-  String cp              = "";
-  String municipio       = "";
-
+  private String id_corresponsal = "";
+  private String estado          = "";
+  private String ciudad          = "";
+  private String colonia         = "";
+  private String calle           = "";
+  private String numero          = "";
+  private String cp              = "";
+  private int brand;
+  
   /**
    * Constructor - Initializes the Telcel object data. Moreover, it starts the
    * process to retrieve the coordinates.
@@ -40,32 +39,27 @@ public class Telcel extends CommerceNoCoords
     String id_corresponsal,
     String estado,
     String ciudad,
-    String delegacion,
     String colonia,
     String calle,
     String numero,
-    String cp
+    String cp,
+    int brand
   ) {
     this.id_corresponsal = id_corresponsal;
     this.estado = estado;
     this.ciudad = ciudad;
-    this.delegacion = delegacion;
     this.colonia = colonia;
     this.calle = calle;
     this.numero = numero;
     this.cp = cp;
+    this.brand = brand;
     loadCoords();
   }
 
   /**
    * {@inheritDoc}
    */
-  public String getSpecies()   { return "Telcel"; }
-
-  /**
-   * {@inheritDoc}
-   */
-  public String getClassName() { return "null"; }
+  public int getBrand() { return this.brand; }
 
   /**
    * {@inheritDoc}

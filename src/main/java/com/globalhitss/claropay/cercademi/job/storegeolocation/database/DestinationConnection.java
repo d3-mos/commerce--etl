@@ -1,6 +1,6 @@
-package com.globalhitss.claropay.cercademi_etl.DataBase;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.database;
 
-import com.globalhitss.claropay.cercademi_etl.AppServices.AppProperties;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.config.AppProperties;
 
 
 /**

@@ -1,8 +1,8 @@
-package com.globalhitss.claropay.cercademi_etl.ETL;
-
-import com.globalhitss.claropay.cercademi_etl.Models.Commerce;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
 
 import java.util.LinkedList;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
 
 
 /** 
@@ -10,11 +10,11 @@ import java.util.LinkedList;
  * 
  * It sets the load procedure custom to Commerce structure. To goal this,
  * the structure to load MUST implements the
- * {@link com.globalhitss.claropay.cercademi_etl.Models.Commerce} interface.
+ * {@link com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce} interface.
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
  * @see     ETL
  */
 public abstract class ETLCommerce extends ETL<Commerce>
@@ -34,15 +34,17 @@ public abstract class ETLCommerce extends ETL<Commerce>
     try {
       destination.startConnection();
 
-      commerceList.forEach( commerce -> destination.tryInsert(
-          "species, class_name, address, lat, lng, past_id",
-          "'" + commerce.getSpecies()    + "'," +
-          " " + commerce.getClassName()  + "," +
-          "'" + commerce.getAddress()    + "'," +
-          "'" + commerce.getLatitude()   + "'," +
-          "'" + commerce.getLongitude()  + "'," +
-          "'" + commerce.getPastId()     + "'",
-          "commerce_list"
+      commerceList.forEach( commerce -> destination.tryUpdate(
+        "BRAND, ADDRESS, LATITUDE, LONGITUDE, PAST_ID",
+        "'" + commerce.getBrand()      + "'," +
+        "'" + commerce.getAddress()    + "'," +
+        "'" + commerce.getLatitude()   + "'," +
+        "'" + commerce.getLongitude()  + "'," +
+        "'" + commerce.getPastId()     + "'",
+        "CAT_STORE_LOCATION",
+        "PAST_ID='" + commerce.getPastId() + "' and " +
+        "BRAND='"   + commerce.getBrand()  + "'",
+        true
       ) );
 
       destination.closeConnection();

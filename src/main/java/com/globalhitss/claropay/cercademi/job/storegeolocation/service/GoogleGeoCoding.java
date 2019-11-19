@@ -1,7 +1,6 @@
-package com.globalhitss.claropay.cercademi_etl.WebServices;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.service;
 
-import com.globalhitss.claropay.cercademi_etl.AppServices.AppProperties;
-
+import com.globalhitss.claropay.cercademi.job.storegeolocation.config.AppProperties;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;

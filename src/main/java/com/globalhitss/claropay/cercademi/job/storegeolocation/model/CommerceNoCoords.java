@@ -1,8 +1,8 @@
-package com.globalhitss.claropay.cercademi_etl.Models;
-
-import com.globalhitss.claropay.cercademi_etl.WebServices.GoogleGeoCoding;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.model;
 
 import java.util.concurrent.CompletableFuture;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.service.GoogleGeoCoding;
 
 
 /**

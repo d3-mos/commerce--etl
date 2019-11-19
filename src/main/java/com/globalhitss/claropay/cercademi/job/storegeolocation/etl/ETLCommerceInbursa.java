@@ -1,10 +1,11 @@
-package com.globalhitss.claropay.cercademi_etl.ETL;
-
-import  com.globalhitss.claropay.cercademi_etl.Models.Inbursa;
-import  com.globalhitss.claropay.cercademi_etl.Models.Commerce;
-import com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.etl;
 
 import java.util.LinkedList;
+
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords;
+import com.globalhitss.claropay.cercademi.job.storegeolocation.model.Inbursa;
+
 import java.sql.ResultSet;
 
 
@@ -14,9 +15,9 @@ import java.sql.ResultSet;
  * 
  * @author  Ricardo Bermúdez Bermúdez
  * @version 1.0.0, Oct 23th, 2019.
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Commerce
- * @see     com.globalhitss.claropay.cercademi_etl.Models.CommerceNoCoords
- * @see     com.globalhitss.claropay.cercademi_etl.Models.Inbursa
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Commerce
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.CommerceNoCoords
+ * @see     com.globalhitss.claropay.cercademi.job.storegeolocation.model.Inbursa
  * @see     ETL
  * @see     ETLCommerce
  */
@@ -38,22 +39,33 @@ public class ETLCommerceInbursa extends ETLCommerce
     
     try {
       source.startConnection();
+      destination.startConnection();
 
-      ResultSet inbursaRows = source.get(
+      ResultSet inbursaRows = source.getUpdatedRows(
         "consecutivo, estado, ciudad_municipio, domicilio",
-        "cat_emisores"
+        "cat_emisores",
+        "last_change_ts"
       );
-
+      
+      ResultSet brandToken = destination.get(
+        "STORE_ID",
+        "CAT_STORE",
+        "STORE='Inbursa'"
+      );
+      brandToken.next();
+      
       while (inbursaRows.next()) {
         inbursaList.add( new Inbursa(
           inbursaRows.getString("consecutivo"),
-          inbursaRows.getString("domicilio")
+          inbursaRows.getString("domicilio"),
+          brandToken.getInt("STORE_ID")
         ) );
       }
 
       inbursaList.forEach(obj -> ((CommerceNoCoords) obj).waitingByCoords());
 
       source.closeConnection();
+      destination.closeConnection();
     }
     catch (Exception e) { throw new ETLExtractException("", e); }
 

@@ -1,4 +1,4 @@
-package com.globalhitss.claropay.cercademi_etl.AppServices;
+package com.globalhitss.claropay.cercademi.job.storegeolocation.config;
 
 import java.io.IOException;
 import java.util.Properties;
