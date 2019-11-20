@@ -35,15 +35,15 @@ public abstract class ETLCommerce extends ETL<StoreLocation>
       destination.startConnection();
 
       commerceList.forEach( commerce -> destination.tryUpdate(
-        "BRAND, ADDRESS, LATITUDE, LONGITUDE, PAST_ID",
-        "'" + commerce.getBrand()      + "'," +
+        "BRAND_ID, ADDRESS, LATITUDE, LONGITUDE, PAST_ID",
+        "'" + commerce.getBrandId()      + "'," +
         "'" + commerce.getAddress()    + "'," +
         "'" + commerce.getLatitude()   + "'," +
         "'" + commerce.getLongitude()  + "'," +
         "'" + commerce.getPastId()     + "'",
         "CAT_STORE_LOCATION",
-        "PAST_ID='" + commerce.getPastId() + "' and " +
-        "BRAND='"   + commerce.getBrand()  + "'",
+        "PAST_ID='"  + commerce.getPastId()  + "' and " +
+        "BRAND_ID='" + commerce.getBrandId() + "'",
         true
       ) );
 

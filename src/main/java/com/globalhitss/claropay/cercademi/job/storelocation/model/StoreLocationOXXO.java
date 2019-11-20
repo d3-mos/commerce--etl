@@ -64,7 +64,7 @@ public class StoreLocationOXXO implements StoreLocation
   /**
    * {@inheritDoc}
    */
-  public int getBrand()   { return this.brand; }
+  public int getBrandId()   { return this.brand; }
  
   /**
    * {@inheritDoc}

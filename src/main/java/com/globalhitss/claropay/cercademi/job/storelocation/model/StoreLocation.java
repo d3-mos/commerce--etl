@@ -18,7 +18,7 @@ public interface StoreLocation
    * Link method - This method is use to retrieve the commerce species such as
    * "OXXO", "Inbursa", "Sears", etc.
    */
-  public int getBrand();
+  public int getBrandId();
 
   /**
    * Link method - This method is use to retrieves the commerce address builded

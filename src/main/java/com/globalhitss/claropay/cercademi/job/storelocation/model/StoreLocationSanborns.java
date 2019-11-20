@@ -54,7 +54,7 @@ public class StoreLocationSanborns extends StoreLocationNoCoords
   /**
    * {@inheritDoc}
    */
-  public int getBrand() { return this.brand; }
+  public int getBrandId() { return this.brand; }
 
   /**
    * {@inheritDoc}
